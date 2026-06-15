@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { User, Lock } from "lucide-react";
 import InputField from "../components/InputField";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,8 @@ import { useAuth } from "../context/AuthContext";
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <main className="min-h-screen flex items-center justify-center relative p-6 pt-24 bg-slate-950 overflow-hidden">
@@ -42,23 +45,32 @@ const LoginPage = () => {
             className="flex flex-col gap-5" 
             onSubmit={(e) => {
               e.preventDefault();
-              login({ id: 1, username: 'Observer1', role: 'user' }, 'dummy-token');
-              navigate('/dashboard');
+              if (username.toLowerCase() === 'admin') {
+                login({ id: 0, username: 'Admin', role: 'ADMIN' }, 'admin-token');
+                navigate('/admin');
+              } else {
+                login({ id: 1, username: username || 'Observer1', role: 'user' }, 'dummy-token');
+                navigate('/dashboard');
+              }
             }}
           >
             <InputField
               label="Username"
               type="text"
-              placeholder="Enter your username (anything works!)"
+              placeholder="Enter 'admin' for Admin access"
               icon={User}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <div className="flex flex-col gap-3">
               <InputField
                 label="Password"
                 type="password"
-                placeholder="Enter your password (anything works!)"
+                placeholder="Enter your password"
                 icon={Lock}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className="flex justify-end">
                 <a href="#forgot" className="text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors">

@@ -1,14 +1,17 @@
 import React from 'react';
-import { Home, Users, User, PlusCircle, BookOpen } from 'lucide-react';
+import { Home, Users, User, PlusCircle, BookOpen, Shield } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = ({ onNewLogClick }) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const { user } = useAuth();
 
   const isActive = (path) => {
     if (path === '/dashboard') return pathname === '/dashboard' || pathname === '/';
     if (path === '/crews') return pathname === '/crews' || pathname.startsWith('/crew/');
+    if (path === '/admin') return pathname === '/admin';
     return pathname === path;
   };
 
@@ -53,6 +56,21 @@ const Sidebar = ({ onNewLogClick }) => {
           <User size={20} className={isActive('/profile') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
           <span className={isActive('/profile') ? 'font-semibold tracking-wide' : 'font-medium'}>Profile</span>
         </Link>
+        
+        {user?.role === 'ADMIN' && (
+          <>
+            <div className="mt-4 mb-2 px-4">
+              <div className="h-px w-full bg-slate-800"></div>
+            </div>
+            <Link 
+              to="/admin" 
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/admin') ? 'bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+            >
+              <Shield size={20} className={isActive('/admin') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
+              <span className={isActive('/admin') ? 'font-semibold tracking-wide' : 'font-medium'}>Admin</span>
+            </Link>
+          </>
+        )}
       </nav>
 
       <div className="p-6 mt-auto">

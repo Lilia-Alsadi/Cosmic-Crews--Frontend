@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoreHorizontal, Star, MessageCircle, Share2, Target, Telescope, MapPin } from 'lucide-react';
+import { Star, MessageCircle, Share2, Target, Telescope, MapPin, Flag } from 'lucide-react';
 
 const ObservationPost = ({ onClick }) => {
   return (
@@ -21,9 +21,6 @@ const ObservationPost = ({ onClick }) => {
             </span>
           </div>
         </div>
-        <button className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
-          <MoreHorizontal size={20} />
-        </button>
       </div>
 
       <div className="px-4 pb-4 flex flex-wrap gap-2">
@@ -83,9 +80,14 @@ const ObservationPost = ({ onClick }) => {
           </button>
         </div>
 
-        <button className="flex items-center gap-2 mt-2 p-2 rounded-full hover:bg-white/5 transition-colors group">
-          <Share2 size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button className="flex items-center gap-2 mt-2 p-2 rounded-full hover:bg-red-500/10 transition-colors group" title="Report/Flag">
+            <Flag size={20} className="text-gray-400 group-hover:text-red-400 transition-colors" />
+          </button>
+          <button className="flex items-center gap-2 mt-2 p-2 rounded-full hover:bg-white/5 transition-colors group" title="Share">
+            <Share2 size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+          </button>
+        </div>
       </div>
 
     </article>

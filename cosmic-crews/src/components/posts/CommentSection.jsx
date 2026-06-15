@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pencil, Trash2, Send } from 'lucide-react';
+import { Pencil, Trash2, Send, Flag } from 'lucide-react';
 
 const CommentSection = () => {
   return (
@@ -29,8 +29,13 @@ const CommentSection = () => {
             alt="AstroMark" 
             className="w-8 h-8 rounded-full object-cover mt-1"
           />
-          <div className="flex flex-col">
-            <span className="font-bold text-white text-sm">AstroMark</span>
+          <div className="flex flex-col flex-1">
+            <div className="flex items-center justify-between w-full">
+              <span className="font-bold text-white text-sm">AstroMark</span>
+              <button className="text-slate-500 hover:text-red-400 transition-colors" title="Flag Comment">
+                <Flag size={14} />
+              </button>
+            </div>
             <p className="text-slate-300 text-sm mt-0.5 leading-relaxed">
               Incredible detail! Did you use any specific filters for this, or is this just stacked raw data?
             </p>
@@ -52,6 +57,10 @@ const CommentSection = () => {
                 </button>
                 <button className="text-red-400 hover:text-red-300 transition-colors" title="Delete">
                   <Trash2 size={14} />
+                </button>
+                <div className="flex-1"></div>
+                <button className="text-slate-500 hover:text-red-400 transition-colors" title="Flag Comment">
+                  <Flag size={14} />
                 </button>
               </div>
               <p className="text-slate-300 text-sm mt-0.5 leading-relaxed">

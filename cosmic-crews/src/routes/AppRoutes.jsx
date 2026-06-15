@@ -6,6 +6,7 @@ import DashboardPage from "../pages/DashboardPage";
 import ObservationLogsPage from "../pages/ObservationLogsPage";
 import CrewsDirectoryPage from "../pages/CrewsDirectoryPage";
 import CrewDashboardPage from "../pages/CrewDashboardPage";
+import AdminDashboardPage from "../pages/AdminDashboardPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import PublicLayout from "../components/layout/PublicLayout";
@@ -19,6 +20,7 @@ const AppRoutes = () => (
         <Route path="/logs" element={<ProtectedRoute><ObservationLogsPage /></ProtectedRoute>} />
         <Route path="/crews" element={<ProtectedRoute><CrewsDirectoryPage /></ProtectedRoute>} />
         <Route path="/crew/:id" element={<ProtectedRoute><CrewDashboardPage /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute requiredRole="ADMIN"><AdminDashboardPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
     </Routes>
 );
