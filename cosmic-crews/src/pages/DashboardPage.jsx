@@ -6,13 +6,15 @@ import ObservationPost from '../components/dashboard/ObservationPost';
 import CosmicEventsWidget from '../components/dashboard/CosmicEventsWidget';
 import TargetOfTheNightWidget from '../components/dashboard/TargetOfTheNightWidget';
 import SingleObservationModal from '../components/posts/SingleObservationModal';
+import CreateLogModal from '../components/posts/CreateLogModal';
 
 const DashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateLogModalOpen, setIsCreateLogModalOpen] = useState(false);
 
   return (
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
-      <Sidebar />
+      <Sidebar onNewLogClick={() => setIsCreateLogModalOpen(true)} />
        <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
         <div className="flex min-h-full">
           
@@ -50,6 +52,11 @@ const DashboardPage = () => {
       <SingleObservationModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
+      />
+
+      <CreateLogModal 
+        isOpen={isCreateLogModalOpen} 
+        onClose={() => setIsCreateLogModalOpen(false)} 
       />
     </div>
   );
