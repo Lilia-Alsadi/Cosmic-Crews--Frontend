@@ -1,7 +1,12 @@
 import { User, Mail, Lock } from "lucide-react";
 import InputField from "../components/InputField";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   return (
     <main className="min-h-screen flex items-center justify-center relative p-6 pt-24 bg-slate-950 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -33,7 +38,14 @@ const RegisterPage = () => {
             </p>
           </div>
 
-          <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+          <form 
+            className="flex flex-col gap-5" 
+            onSubmit={(e) => {
+              e.preventDefault();
+              login({ id: 2, username: 'NewObserver', role: 'user' }, 'dummy-token');
+              navigate('/dashboard');
+            }}
+          >
             <InputField
               label="Full Name"
               type="text"

@@ -7,12 +7,13 @@ import ObservationLogsPage from "../pages/ObservationLogsPage";
 import CrewsPage from "../pages/CrewsPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import PublicLayout from "../components/layout/PublicLayout";
 
 const AppRoutes = () => (
     <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
+        <Route path="/login" element={<PublicLayout><LoginPage /></PublicLayout>} />
+        <Route path="/register" element={<PublicLayout><RegisterPage /></PublicLayout>} />
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path="/logs" element={<ProtectedRoute><ObservationLogsPage /></ProtectedRoute>} />
         <Route path="/crews" element={<ProtectedRoute><CrewsPage /></ProtectedRoute>} />
