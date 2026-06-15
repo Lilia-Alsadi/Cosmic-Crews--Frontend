@@ -12,20 +12,20 @@ const DashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateLogModalOpen, setIsCreateLogModalOpen] = useState(false);
 
+  const [stargazingIndex, setStargazingIndex] = useState(null);
+
   return (
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
       <Sidebar onNewLogClick={() => setIsCreateLogModalOpen(true)} />
-       <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
         <div className="flex min-h-full">
-          
+
           <main className="flex-1 px-8 py-6 pb-24">
             <div className="max-w-5xl flex flex-col gap-8">
-              <CosmicAlertsBanner 
-                title="High Visibility Alert!" 
-                description="The Stargazing Index is at 88 tonight. Perfect conditions for deep-sky nebulae observation. Geminids Meteor Shower peaks at midnight!"
-              />
 
-              <StargazingIndexWidget />
+              <CosmicAlertsBanner stargazingIndex={stargazingIndex} />
+
+              <StargazingIndexWidget setGlobalIndex={setStargazingIndex} />
 
               <div className="flex flex-col gap-6 mt-4">
                 <ObservationPost onClick={() => setIsModalOpen(true)} />
@@ -37,9 +37,6 @@ const DashboardPage = () => {
 
           <aside className="w-80 border-l border-slate-800 shrink-0 sticky top-0 h-screen overflow-hidden">
             <div className="p-6 flex flex-col gap-6 h-full">
-              <div className="flex-1 overflow-hidden">
-                <CosmicEventsWidget />
-              </div>
               <div className="shrink-0">
                 <TargetOfTheNightWidget />
               </div>
@@ -49,14 +46,14 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <SingleObservationModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <SingleObservationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
 
-      <CreateLogModal 
-        isOpen={isCreateLogModalOpen} 
-        onClose={() => setIsCreateLogModalOpen(false)} 
+      <CreateLogModal
+        isOpen={isCreateLogModalOpen}
+        onClose={() => setIsCreateLogModalOpen(false)}
       />
     </div>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import Sidebar from '../components/layout/Sidebar';
-import PlatformTelemetry from '../components/PlatformTelemetry';
-import UserManagementTable from '../components/UserManagementTable';
-import ContentModerationQueue from '../components/ContentModerationQueue';
+import PlatformTelemetry from '../components/admin/PlatformTelemetry';
+import UserManagementTable from '../components/admin/UserManagementTable';
+import ContentModerationQueue from '../components/admin/ContentModerationQueue';
 
 const AdminDashboardPage = () => {
   return (
