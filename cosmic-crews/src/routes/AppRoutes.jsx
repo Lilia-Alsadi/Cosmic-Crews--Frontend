@@ -4,7 +4,8 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import ObservationLogsPage from "../pages/ObservationLogsPage";
-import CrewsPage from "../pages/CrewsPage";
+import CrewsDirectoryPage from "../pages/CrewsDirectoryPage";
+import CrewDashboardPage from "../pages/CrewDashboardPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import PublicLayout from "../components/layout/PublicLayout";
@@ -16,7 +17,8 @@ const AppRoutes = () => (
         <Route path="/register" element={<PublicLayout><RegisterPage /></PublicLayout>} />
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path="/logs" element={<ProtectedRoute><ObservationLogsPage /></ProtectedRoute>} />
-        <Route path="/crews" element={<ProtectedRoute><CrewsPage /></ProtectedRoute>} />
+        <Route path="/crews" element={<ProtectedRoute><CrewsDirectoryPage /></ProtectedRoute>} />
+        <Route path="/crew/:id" element={<ProtectedRoute><CrewDashboardPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
     </Routes>
 );

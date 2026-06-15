@@ -5,7 +5,6 @@ const CommentSection = () => {
   return (
     <div className="flex flex-col gap-6 mt-4 pb-8">
       
-      {/* Input Area */}
       <div className="flex items-center gap-3 p-2 pl-4 rounded-full bg-slate-800/50 border border-slate-700 focus-within:border-purple-500/50 focus-within:bg-slate-800 transition-colors">
         <img 
           src="https://i.pravatar.cc/150?u=currentuser" 
@@ -22,10 +21,8 @@ const CommentSection = () => {
         </button>
       </div>
 
-      {/* Comment List */}
       <div className="flex flex-col gap-5">
         
-        {/* Standard Comment */}
         <div className="flex items-start gap-3">
           <img 
             src="https://i.pravatar.cc/150?u=astromark" 
@@ -40,7 +37,6 @@ const CommentSection = () => {
           </div>
         </div>
 
-        {/* Owned Comment (With CRUD actions) */}
         <div className="flex flex-col gap-3">
           <div className="flex items-start gap-3">
             <img 
@@ -51,7 +47,6 @@ const CommentSection = () => {
             <div className="flex flex-col flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-bold text-white text-sm">Generic user</span>
-                {/* CRUD Actions */}
                 <button className="text-blue-400 hover:text-blue-300 transition-colors" title="Edit">
                   <Pencil size={14} />
                 </button>

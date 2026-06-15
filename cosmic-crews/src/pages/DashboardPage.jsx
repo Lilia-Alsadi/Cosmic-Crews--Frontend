@@ -19,7 +19,7 @@ const DashboardPage = () => {
         <div className="flex min-h-full">
           
           <main className="flex-1 px-8 py-6 pb-24">
-            <div className="max-w-5xl mx-auto flex flex-col gap-8">
+            <div className="max-w-5xl flex flex-col gap-8">
               <CosmicAlertsBanner 
                 title="High Visibility Alert!" 
                 description="The Stargazing Index is at 88 tonight. Perfect conditions for deep-sky nebulae observation. Geminids Meteor Shower peaks at midnight!"

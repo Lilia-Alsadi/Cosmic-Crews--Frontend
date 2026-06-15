@@ -4,7 +4,6 @@ import { MoreHorizontal, Star, Share2 } from 'lucide-react';
 const LogDetails = () => {
   return (
     <div className="flex flex-col gap-6 w-full h-full">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img 
@@ -22,7 +21,6 @@ const LogDetails = () => {
         </button>
       </div>
 
-      {/* Metadata Badges */}
       <div className="flex flex-wrap gap-2">
         <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-sm font-medium text-slate-300">
           Target: Orion Nebula
@@ -35,7 +33,6 @@ const LogDetails = () => {
         </div>
       </div>
 
-      {/* Caption */}
       <div className="text-slate-300 text-sm leading-relaxed">
         The Great Nebula in Orion was absolutely breathtaking tonight. The core trapezium cluster was razor sharp, and the nebulosity extended far beyond what I normally capture. Conditions were remarkably stable despite the light breeze. 
         <div className="mt-2">
@@ -44,7 +41,6 @@ const LogDetails = () => {
         </div>
       </div>
 
-      {/* Action Bar */}
       <div className="flex items-center justify-between pb-4 border-b border-slate-800 mt-2">
         <button className="flex items-center gap-2 group">
           <div className="p-2 rounded-full group-hover:bg-purple-500/10 transition-colors">

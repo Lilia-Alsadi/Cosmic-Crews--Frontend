@@ -3,7 +3,7 @@ import { MoreHorizontal, Star, MessageCircle, Share2, Target, Telescope, MapPin 
 
 const ObservationPost = ({ onClick }) => {
   return (
-    <article className="bg-[#070a14]/60 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-xl w-full mb-6">
+    <article className="bg-[#0F1428] border border-slate-800 rounded-xl overflow-hidden shadow-xl w-full mb-6">
       
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">

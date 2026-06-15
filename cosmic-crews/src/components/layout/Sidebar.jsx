@@ -1,7 +1,17 @@
 import React from 'react';
-import { Home, Compass, User, Settings, PlusCircle } from 'lucide-react';
+import { Home, Users, User, PlusCircle, BookOpen } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = ({ onNewLogClick }) => {
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  const isActive = (path) => {
+    if (path === '/dashboard') return pathname === '/dashboard' || pathname === '/';
+    if (path === '/crews') return pathname === '/crews' || pathname.startsWith('/crew/');
+    return pathname === path;
+  };
+
   return (
     <aside className="fixed top-0 left-0 w-64 h-screen bg-[#070a14] border-r border-white/5 flex flex-col z-50">
       <div className="p-6 flex items-center gap-3">
@@ -12,37 +22,37 @@ const Sidebar = ({ onNewLogClick }) => {
       </div>
 
       <nav className="flex-1 px-4 py-4 flex flex-col gap-2">
-        <a 
-          href="/dashboard" 
-          className="flex items-center gap-3 px-4 py-3 rounded-xl bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)] transition-all"
+        <Link 
+          to="/dashboard" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/dashboard') ? 'bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
         >
-          <Home size={20} className="text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" />
-          <span className="font-semibold tracking-wide">Home</span>
-        </a>
+          <Home size={20} className={isActive('/dashboard') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
+          <span className={isActive('/dashboard') ? 'font-semibold tracking-wide' : 'font-medium'}>Home</span>
+        </Link>
 
-        <a 
-          href="/explore" 
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+        <Link 
+          to="/crews" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/crews') ? 'bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
         >
-          <Compass size={20} />
-          <span className="font-medium">Explore</span>
-        </a>
+          <Users size={20} className={isActive('/crews') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
+          <span className={isActive('/crews') ? 'font-semibold tracking-wide' : 'font-medium'}>Crews</span>
+        </Link>
 
-        <a 
-          href="/profile" 
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+        <Link 
+          to="/logs" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/logs') ? 'bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
         >
-          <User size={20} />
-          <span className="font-medium">Profile</span>
-        </a>
+          <BookOpen size={20} className={isActive('/logs') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
+          <span className={isActive('/logs') ? 'font-semibold tracking-wide' : 'font-medium'}>Logs</span>
+        </Link>
 
-        <a 
-          href="/settings" 
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+        <Link 
+          to="/profile" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/profile') ? 'bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
         >
-          <Settings size={20} />
-          <span className="font-medium">Settings</span>
-        </a>
+          <User size={20} className={isActive('/profile') ? 'text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]' : ''} />
+          <span className={isActive('/profile') ? 'font-semibold tracking-wide' : 'font-medium'}>Profile</span>
+        </Link>
       </nav>
 
       <div className="p-6 mt-auto">

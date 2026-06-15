@@ -15,7 +15,7 @@ const ProfilePage = () => {
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
       <Sidebar />
       <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
-        <main className="min-h-screen bg-[#0B1021] text-white p-8 max-w-6xl mx-auto flex flex-col gap-10">
+        <main className="min-h-screen bg-[#0B1021] text-white p-8 max-w-6xl flex flex-col gap-10">
           
           <ProfileHeader onEditClick={() => setIsEditProfileModalOpen(true)} />
           <SkyMilesWidget />
