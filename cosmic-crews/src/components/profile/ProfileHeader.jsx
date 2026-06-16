@@ -1,31 +1,24 @@
-import React from 'react';
-import { Mail, Calendar, LogOut, Edit2 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import React from "react";
+import { Mail, Calendar, LogOut, Edit2 } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import { DEFAULT_AVATAR } from "../../utils/constants";
 
 const ProfileHeader = ({ onEditClick }) => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+
+  if (!user) return null;
 
   return (
-    <div className="bg-[#0F1428] rounded-2xl border border-slate-800 shadow-2xl overflow-hidden mb-8">
-      
+    <div className="bg-[#0F1428] rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
       <div className="h-48 w-full relative">
-        <img 
-          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop" 
-          alt="Space Banner" 
-          className="w-full h-full object-cover"
-        />
+        <img src={user.banner_url || "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop"} alt="Space Banner" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F1428]/80 to-transparent"></div>
       </div>
 
       <div className="px-8 pb-8 relative">
-        
         <div className="absolute -top-16 left-8">
           <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" 
-              alt="Lilia Alsadi Avatar" 
-              className="w-32 h-32 rounded-full object-cover border-4 border-[#0F1428] shadow-xl"
-            />
+            <img src={user.avatar_url || DEFAULT_AVATAR} alt={`${user.full_name || user.username} Avatar`} className="w-32 h-32 rounded-full object-cover border-4 border-[#0F1428] shadow-xl" />
             <div className="absolute inset-0 rounded-full border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)] pointer-events-none"></div>
           </div>
         </div>
@@ -35,27 +28,17 @@ const ProfileHeader = ({ onEditClick }) => {
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-white tracking-wide">
-                Lilia Alsadi
-              </h1>
-              <p className="text-purple-400 font-medium text-sm">
-                @Lilia_Astro
-              </p>
+              <h1 className="text-3xl font-bold text-white tracking-wide">{user.full_name || "Anonymous Observer"}</h1>
+              <p className="text-purple-400 font-medium text-sm">@{user.username}</p>
             </div>
-            
+
             <div className="flex items-center gap-3">
-              <button 
-                onClick={onEditClick}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-900/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/50 transition-colors"
-              >
+              <button onClick={onEditClick} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-900/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/50 transition-colors">
                 <Edit2 size={16} />
                 <span className="text-sm font-semibold tracking-wide">Edit Profile</span>
               </button>
-              
-              <button 
-                onClick={logout}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 transition-colors"
-              >
+
+              <button onClick={logout} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 transition-colors">
                 <LogOut size={16} />
                 <span className="text-sm font-semibold tracking-wide">Logout</span>
               </button>
@@ -65,15 +48,22 @@ const ProfileHeader = ({ onEditClick }) => {
           <div className="flex items-center gap-6 mt-4">
             <div className="flex items-center gap-2 text-slate-400">
               <Mail size={16} />
-              <span className="text-sm">lilia@example.com</span>
+              <span className="text-sm">{user.email || "Hidden"}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
               <Calendar size={16} />
-              <span className="text-sm">Joined May 2026</span>
+              <span className="text-sm">
+                Joined{" "}
+                {user.created_at
+                  ? new Date(user.created_at).toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "Unknown"}
+              </span>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
