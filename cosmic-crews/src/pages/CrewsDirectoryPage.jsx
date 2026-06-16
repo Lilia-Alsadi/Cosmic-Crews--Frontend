@@ -96,7 +96,7 @@ const CrewsDirectoryPage = () => {
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
       <Sidebar />
 
-      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <div className="flex-1 md:ml-64 overflow-y-auto custom-scrollbar h-screen pb-20 md:pb-0">
         <main className="p-8 max-w-7xl">
           <DirectoryHeader activeTab={activeTab} onTabChange={setActiveTab} onCreateClick={() => setIsCreateModalOpen(true)} />
 

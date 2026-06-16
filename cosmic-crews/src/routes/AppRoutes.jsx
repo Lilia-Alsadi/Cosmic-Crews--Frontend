@@ -3,7 +3,7 @@ import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
-import ObservationLogsPage from "../pages/ObservationLogsPage";
+import ObservationsPage from "../pages/ObservationsPage";
 import CrewsDirectoryPage from "../pages/CrewsDirectoryPage";
 import CrewDashboardPage from "../pages/CrewDashboardPage";
 import AdminDashboardPage from "../pages/AdminDashboardPage";
@@ -49,7 +49,7 @@ const AppRoutes = () => (
       path="/logs"
       element={
         <ProtectedRoute>
-          <ObservationLogsPage />
+          <ObservationsPage />
         </ProtectedRoute>
       }
     />

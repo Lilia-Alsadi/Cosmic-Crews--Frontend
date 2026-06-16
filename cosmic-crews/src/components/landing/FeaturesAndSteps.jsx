@@ -98,7 +98,7 @@ const FeaturesAndSteps = () => (
         <p className="text-slate-400 text-lg">Everything a serious stargazer needs, without the clutter.</p>
       </div>
 
-      <div className="grid gap-6 mb-20 grid-cols-3">
+      <div className="grid gap-6 mb-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {FEATURES.map((f) => (
           <FeatureCard key={f.id} {...f} />
         ))}
@@ -115,7 +115,7 @@ const FeaturesAndSteps = () => (
 
       <div className="relative">
         <div className="absolute top-10 h-px left-[16.6%] right-[16.6%] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent pointer-events-none" />
-        <ol className="grid grid-cols-3 gap-8" aria-label="Steps to get started">
+        <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Steps to get started">
           {STEPS.map((s) => (
             <StepItem key={s.number} {...s} />
           ))}

@@ -45,7 +45,7 @@ const HeroSection = () => (
     <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_50%_at_50%_-5%,rgba(124,58,237,0.18),transparent_65%)]" />
 
     <div className="section-container relative z-10">
-      <div className="grid items-center gap-16 grid-cols-2">
+      <div className="grid items-center gap-16 grid-cols-1 lg:grid-cols-2">
         <div className="flex flex-col gap-6">
           <h1 id="hero-heading" className="font-display font-bold text-5xl leading-tight tracking-tight text-white">
             Your Cozy Hub

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Flag, AlertTriangle, Check, Trash2 } from "lucide-react";
 import { adminService } from "../../api/adminService";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { DEFAULT_LOG_IMAGE } from "../../utils/constants";
 import SingleObservationModal from "../posts/SingleObservationModal";
 
@@ -91,7 +91,7 @@ const ContentModerationQueue = () => {
   const handleItemClick = async (item) => {
     try {
       const targetId = item.item_type === "comment" ? item.observation_id : item.id;
-      const log = await logService.getLog(targetId);
+      const log = await observationService.getObservation(targetId);
       setSelectedLog(log);
       setIsModalOpen(true);
     } catch (err) {

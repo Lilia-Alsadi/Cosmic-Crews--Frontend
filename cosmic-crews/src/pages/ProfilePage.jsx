@@ -29,7 +29,7 @@ const ProfilePage = () => {
   return (
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
       <Sidebar />
-      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <div className="flex-1 md:ml-64 overflow-y-auto custom-scrollbar h-screen pb-20 md:pb-0">
         <main className="min-h-screen bg-[#0B1021] text-white p-8 max-w-6xl flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <ProfileHeader onEditClick={() => setIsEditProfileModalOpen(true)} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Star, MessageCircle, Target, Telescope, MapPin, Flag, Trash2 } from "lucide-react";
 import ConfirmationModal from "../layout/ConfirmationModal";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { adminService } from "../../api/adminService";
 import { useAuth } from "../../context/AuthContext";
 import { DEFAULT_AVATAR, DEFAULT_LOG_IMAGE } from "../../utils/constants";
@@ -27,7 +27,7 @@ const ObservationPost = ({ log, onClick }) => {
   const handleFlag = async () => {
     setIsFlagging(true);
     try {
-      await logService.flagLog(log.id);
+      await observationService.flagObservation(log.id);
       alert("Observation flagged for review.");
     } catch (err) {
       console.error("Error flagging observation:", err);
@@ -42,7 +42,7 @@ const ObservationPost = ({ log, onClick }) => {
     if (isLiking) return;
     setIsLiking(true);
     try {
-      const response = await logService.likeLog(log.id);
+      const response = await observationService.likeObservation(log.id);
       if (response.liked) {
         setLikesCount((prev) => prev + 1);
         setHasLiked(true);

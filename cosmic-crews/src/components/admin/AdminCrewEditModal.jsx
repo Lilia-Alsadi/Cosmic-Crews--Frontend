@@ -112,7 +112,7 @@ const AdminCrewEditModal = ({ isOpen, crew, onClose, onCrewUpdated }) => {
           <div className="overflow-y-auto custom-scrollbar flex-1 pr-2">
             {activeTab === "details" && (
               <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm text-slate-400">Crew Name</label>
                     <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500" />
@@ -136,7 +136,7 @@ const AdminCrewEditModal = ({ isOpen, crew, onClose, onCrewUpdated }) => {
                   <label className="text-sm text-slate-400">Description</label>
                   <textarea rows="3" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 resize-none" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-sm text-slate-400">Location</label>
                     <input type="text" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500" />
@@ -187,7 +187,7 @@ const AdminCrewEditModal = ({ isOpen, crew, onClose, onCrewUpdated }) => {
                             className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-white"
                             rows="2"
                           />
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             <input
                               type="datetime-local"
                               value={eventFormData.start_time}

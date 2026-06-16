@@ -6,7 +6,7 @@ import CrewNavigatorsWidget from "../components/crews/CrewNavigatorsWidget";
 import ObservationPost from "../components/dashboard/ObservationPost";
 import { useParams, useNavigate } from "react-router-dom";
 import { crewService } from "../api/crewService";
-import { logService } from "../api/logService";
+import { observationService } from "../api/observationService";
 import SingleObservationModal from "../components/posts/SingleObservationModal";
 import SingleEventModal from "../components/crews/SingleEventModal";
 import { useAuth } from "../context/AuthContext";
@@ -32,7 +32,7 @@ const CrewDashboardPage = () => {
         setCrew(crewData);
 
         try {
-          const logsData = await logService.getCrewLogs(id);
+          const logsData = await observationService.getCrewObservations(id);
           setLogs(logsData);
           const eventsData = await crewService.getEvents(id);
           setEvents(eventsData);
@@ -118,7 +118,7 @@ const CrewDashboardPage = () => {
       <SingleEventModal isOpen={isEventModalOpen} onClose={() => setIsEventModalOpen(false)} event={selectedEvent} onRsvpChanged={handleRsvpChanged} />
       <Sidebar />
 
-      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <div className="flex-1 md:ml-64 overflow-y-auto custom-scrollbar h-screen pb-20 md:pb-0">
         <div className="flex min-h-full">
           <main className="flex-1 px-8 py-6 pb-24">
             <div className="max-w-5xl flex flex-col gap-8">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { useAuth } from "../../context/AuthContext";
 import { DEFAULT_LOG_IMAGE } from "../../utils/constants";
 
@@ -9,7 +9,7 @@ const ObservationGallery = ({ onObservationClick }) => {
 
   useEffect(() => {
     if (user) {
-      logService.getGlobalLogs({ user_id: user.id }).then(setObservations).catch(console.error);
+      observationService.getGlobalObservations({ user_id: user.id }).then(setObservations).catch(console.error);
     }
   }, [user]);
 

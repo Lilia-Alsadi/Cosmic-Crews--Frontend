@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MoreHorizontal, Star, Share2, Trash2 } from "lucide-react";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { adminService } from "../../api/adminService";
 import { useAuth } from "../../context/AuthContext";
 import { DEFAULT_AVATAR, DEFAULT_LOG_IMAGE } from "../../utils/constants";
 
-const LogDetails = ({ log }) => {
+const ObservationDetails = ({ log }) => {
   const [likesCount, setLikesCount] = useState(log?.likes_count || 0);
   const [hasLiked, setHasLiked] = useState(log?.has_liked || false);
   const [isLiking, setIsLiking] = useState(false);
@@ -23,7 +23,7 @@ const LogDetails = ({ log }) => {
     if (isLiking) return;
     setIsLiking(true);
     try {
-      const response = await logService.likeLog(log.id);
+      const response = await observationService.likeObservation(log.id);
       if (response.liked) {
         setLikesCount((prev) => prev + 1);
         setHasLiked(true);
@@ -96,4 +96,4 @@ const LogDetails = ({ log }) => {
   );
 };
 
-export default LogDetails;
+export default ObservationDetails;
