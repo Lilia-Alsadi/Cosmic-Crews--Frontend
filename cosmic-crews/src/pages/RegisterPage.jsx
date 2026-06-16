@@ -2,10 +2,19 @@ import { User, Mail, Lock } from "lucide-react";
 import InputField from "../components/InputField";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { authService } from "../api/authService";
+import { useState } from "react";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <main className="min-h-screen flex items-center justify-center relative p-6 pt-24 bg-slate-950 overflow-hidden">
@@ -28,63 +37,50 @@ const RegisterPage = () => {
 
       <div className="relative z-10 w-full max-w-md my-8">
         <div className="bg-slate-900/60 backdrop-blur-xl border border-purple-500/30 rounded-3xl p-8 shadow-[0_0_40px_rgba(168,85,247,0.15)] flex flex-col gap-8 transition-all hover:border-purple-500/50">
-          
           <div className="text-center flex flex-col gap-2">
-            <h2 className="font-display text-3xl font-bold text-white tracking-tight">
-              Join the Crew. ✨
-            </h2>
-            <p className="text-slate-400 text-sm leading-relaxed px-4">
-              Create your observer profile to start logging the cosmos.
-            </p>
+            <h2 className="font-display text-3xl font-bold text-white tracking-tight">Join the Crew. ✨</h2>
+            <p className="text-slate-400 text-sm leading-relaxed px-4">Create your observer profile to start logging the cosmos.</p>
           </div>
 
-          <form 
-            className="flex flex-col gap-5" 
-            onSubmit={(e) => {
+          <form
+            className="flex flex-col gap-5"
+            onSubmit={async (e) => {
               e.preventDefault();
-              login({ id: 2, username: 'NewObserver', role: 'user' }, 'dummy-token');
-              navigate('/dashboard');
+              setError("");
+              if (password !== confirmPassword) {
+                setError("Passwords do not match");
+                return;
+              }
+              setIsLoading(true);
+              try {
+                const data = await authService.register({
+                  email,
+                  password,
+                  username,
+                  full_name: fullName,
+                });
+                login(data.user, data.token);
+                navigate("/dashboard");
+              } catch (err) {
+                setError(err.response?.data?.message || "Registration failed. Please try again.");
+              } finally {
+                setIsLoading(false);
+              }
             }}
           >
-            <InputField
-              label="Full Name"
-              type="text"
-              placeholder="Enter your full name"
-            />
-            
-            <InputField
-              label="Username"
-              type="text"
-              placeholder="Choose a username"
-              icon={User}
-            />
+            {error && <div className="text-red-400 text-sm font-medium">{error}</div>}
+            <InputField label="Full Name" type="text" placeholder="Enter your full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
 
-            <InputField
-              label="Email Address"
-              type="email"
-              placeholder="Enter your email"
-              icon={Mail}
-            />
+            <InputField label="Username" type="text" placeholder="Choose a username" icon={User} value={username} onChange={(e) => setUsername(e.target.value)} />
 
-            <InputField
-              label="Password"
-              type="password"
-              placeholder="Create a password"
-              icon={Lock}
-            />
+            <InputField label="Email Address" type="email" placeholder="Enter your email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} />
 
-            <InputField
-              label="Confirm Password"
-              type="password"
-              placeholder="Confirm your password"
-              icon={Lock}
-            />
+            <InputField label="Password" type="password" placeholder="Create a password" icon={Lock} value={password} onChange={(e) => setPassword(e.target.value)} />
 
-            <button
-              type="submit"
-              className="mt-4 w-full py-3.5 rounded-xl text-white font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 shadow-lg shadow-purple-900/40 hover:shadow-purple-500/30 hover:-translate-y-0.5"
-            >
-              Create Account
+            <InputField label="Confirm Password" type="password" placeholder="Confirm your password" icon={Lock} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+
+            <button type="submit" disabled={isLoading} className="mt-4 w-full py-3.5 rounded-xl text-white font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 shadow-lg shadow-purple-900/40 hover:shadow-purple-500/30 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
 
@@ -96,7 +92,6 @@ const RegisterPage = () => {
               </a>
             </p>
           </div>
-          
         </div>
       </div>
     </main>

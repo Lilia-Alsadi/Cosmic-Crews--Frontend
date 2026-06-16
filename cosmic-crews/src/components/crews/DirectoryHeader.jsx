@@ -1,5 +1,5 @@
-const DirectoryHeader = ({ activeTab = 'Explore', onTabChange, onCreateClick }) => {
-  const tabs = ['Explore', 'Joined Crews', 'Managed by Me'];
+const DirectoryHeader = ({ activeTab = "Explore", onTabChange, onCreateClick }) => {
+  const tabs = ["Explore", "Joined Crews", "Managed by Me"];
 
   return (
     <div className="w-full">
@@ -12,15 +12,7 @@ const DirectoryHeader = ({ activeTab = 'Explore', onTabChange, onCreateClick }) 
 
       <div className="flex gap-8 border-b border-slate-800 mt-6">
         {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => onTabChange && onTabChange(tab)}
-            className={`pb-3 font-medium transition-colors duration-200 ${
-              activeTab === tab
-                ? 'text-white border-b-2 border-purple-500 shadow-[0_4px_10px_-2px_rgba(168,85,247,0.4)]'
-                : 'text-slate-500 hover:text-slate-300'
-            }`}
-          >
+          <button key={tab} onClick={() => onTabChange && onTabChange(tab)} className={`pb-3 font-medium transition-colors duration-200 ${activeTab === tab ? "text-white border-b-2 border-purple-500 shadow-[0_4px_10px_-2px_rgba(168,85,247,0.4)]" : "text-slate-500 hover:text-slate-300"}`}>
             {tab}
           </button>
         ))}

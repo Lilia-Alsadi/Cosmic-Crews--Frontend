@@ -1,26 +1,26 @@
-import React from 'react';
-import { Calendar } from 'lucide-react';
+import React from "react";
+import { Calendar } from "lucide-react";
 
 const CosmicEventsWidget = () => {
   const events = [
     {
       id: 1,
-      date: 'Oct 21',
-      title: 'Orionids (peak)',
-      color: 'text-purple-400'
+      date: "Oct 21",
+      title: "Orionids (peak)",
+      color: "text-purple-400",
     },
     {
       id: 2,
-      date: 'Oct 28',
-      title: 'ISS Flyover (Amman, 19:42)',
-      color: 'text-blue-400'
+      date: "Oct 28",
+      title: "ISS Flyover (Amman, 19:42)",
+      color: "text-blue-400",
     },
     {
       id: 3,
-      date: 'Nov 1',
-      title: 'Lunar Eclipse',
-      color: 'text-pink-400'
-    }
+      date: "Nov 1",
+      title: "Lunar Eclipse",
+      color: "text-pink-400",
+    },
   ];
 
   return (
@@ -34,18 +34,12 @@ const CosmicEventsWidget = () => {
         {events.map((event) => (
           <li key={event.id} className="flex items-start gap-4 group cursor-pointer">
             <div className="flex flex-col items-center justify-center min-w-[50px] bg-white/5 rounded-lg py-2 border border-white/5 group-hover:border-white/20 transition-colors">
-              <span className={`text-xs font-bold uppercase tracking-wider ${event.color}`}>
-                {event.date.split(' ')[0]}
-              </span>
-              <span className="text-sm font-black text-white">
-                {event.date.split(' ')[1]}
-              </span>
+              <span className={`text-xs font-bold uppercase tracking-wider ${event.color}`}>{event.date.split(" ")[0]}</span>
+              <span className="text-sm font-black text-white">{event.date.split(" ")[1]}</span>
             </div>
-            
+
             <div className="flex-1 pt-1">
-              <p className="text-sm text-gray-200 font-medium group-hover:text-white transition-colors">
-                {event.title}
-              </p>
+              <p className="text-sm text-gray-200 font-medium group-hover:text-white transition-colors">{event.title}</p>
             </div>
           </li>
         ))}
