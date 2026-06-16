@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Hexagon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { crewService } from "../../api/crewService";
 
 const SkyMilesWidget = () => {
@@ -10,7 +10,7 @@ const SkyMilesWidget = () => {
 
   useEffect(() => {
     if (user) {
-      Promise.all([logService.getGlobalLogs({ user_id: user.id }), crewService.getAllCrews()])
+      Promise.all([observationService.getGlobalObservations({ user_id: user.id }), crewService.getAllCrews()])
         .then(([logs, allCrews]) => {
           const userCrews = allCrews.filter((c) => c.current_user_role && c.current_user_role !== "none" && c.current_user_role !== "pending");
           const totalStars = logs.reduce((sum, log) => sum + (log.likes_count || 0), 0);

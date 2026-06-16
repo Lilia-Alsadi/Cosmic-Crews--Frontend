@@ -76,7 +76,7 @@ const Footer = () => (
   <footer id="main-footer" role="contentinfo" className="bg-gradient-to-b from-slate-950 to-slate-900 border-t border-white/5">
     <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
     <div className="section-container pt-14 pb-0">
-      <div className="grid gap-10 pb-12 grid-cols-4">
+      <div className="grid gap-10 pb-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

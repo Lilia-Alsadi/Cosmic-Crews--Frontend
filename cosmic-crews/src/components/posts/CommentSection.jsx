@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pencil, Trash2, Send, Flag } from "lucide-react";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 import { adminService } from "../../api/adminService";
 import { useAuth } from "../../context/AuthContext";
 import { DEFAULT_AVATAR } from "../../utils/constants";
@@ -19,7 +19,7 @@ const CommentSection = ({ log, onCommentAdded }) => {
       if (!log?.id) return;
       setIsLoading(true);
       try {
-        const data = await logService.getComments(log.id);
+        const data = await observationService.getComments(log.id);
         setComments(data);
       } catch (err) {
         console.error("Failed to fetch comments", err);
@@ -34,7 +34,7 @@ const CommentSection = ({ log, onCommentAdded }) => {
     if (!newComment.trim() || !log) return;
     setIsSubmitting(true);
     try {
-      const addedComment = await logService.addComment(log.id, {
+      const addedComment = await observationService.addComment(log.id, {
         content: newComment,
       });
       const commentWithUser = {
@@ -56,7 +56,7 @@ const CommentSection = ({ log, onCommentAdded }) => {
 
   const handleFlagComment = async (commentId) => {
     try {
-      await logService.flagComment(commentId);
+      await observationService.flagComment(commentId);
       alert("Comment flagged for review.");
     } catch (err) {
       console.error("Failed to flag comment", err);

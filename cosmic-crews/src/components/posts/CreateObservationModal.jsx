@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Camera, X, Calendar, Loader2 } from "lucide-react";
 import BortleSlider from "./BortleSlider";
 import { motion, AnimatePresence } from "framer-motion";
-import { logService } from "../../api/logService";
+import { observationService } from "../../api/observationService";
 
-const CreateLogModal = ({ isOpen, onClose, onLogCreated }) => {
+const CreateObservationModal = ({ isOpen, onClose, onObservationCreated }) => {
   const [formData, setFormData] = useState({
     title: "",
     target_object: "",
@@ -28,7 +28,7 @@ const CreateLogModal = ({ isOpen, onClose, onLogCreated }) => {
     setUploadingImg(true);
     setError("");
     try {
-      const data = await logService.uploadImage(file);
+      const data = await observationService.uploadImage(file);
       setFormData((prev) => ({ ...prev, image_url: data.image_url }));
     } catch (e) {
       setError("Failed to upload image.");
@@ -46,11 +46,11 @@ const CreateLogModal = ({ isOpen, onClose, onLogCreated }) => {
     setSaving(true);
     setError("");
     try {
-      await logService.createGlobalLog({
+      await observationService.createObservation({
         ...formData,
         observation_date: formData.observation_date || null,
       });
-      if (onLogCreated) onLogCreated();
+      if (onObservationCreated) onObservationCreated();
       onClose();
     } catch (e) {
       setError("Failed to create log");
@@ -111,7 +111,7 @@ const CreateLogModal = ({ isOpen, onClose, onLogCreated }) => {
               <div className="col-span-1 md:col-span-2 flex flex-col">
                 <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Observation Details</h3>
 
-                <form className="grid grid-cols-2 gap-4">
+                <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5 col-span-2">
                     <label className="text-sm text-slate-400">Observation Title</label>
                     <input type="text" placeholder="e.g. Great Red Spot visible tonight!" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder:text-slate-600" />
@@ -284,4 +284,4 @@ const CreateLogModal = ({ isOpen, onClose, onLogCreated }) => {
   );
 };
 
-export default CreateLogModal;
+export default CreateObservationModal;

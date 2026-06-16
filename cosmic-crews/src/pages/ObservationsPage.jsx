@@ -3,9 +3,9 @@ import Sidebar from "../components/layout/Sidebar";
 import ObservationPost from "../components/dashboard/ObservationPost";
 import SingleObservationModal from "../components/posts/SingleObservationModal";
 import { Search, Filter, Loader2 } from "lucide-react";
-import { logService } from "../api/logService";
+import { observationService } from "../api/observationService";
 
-const ObservationLogsPage = () => {
+const ObservationsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedLog, setSelectedLog] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,8 +19,8 @@ const ObservationLogsPage = () => {
     if (searchQuery.trim()) params.search = searchQuery;
     if (filterType !== "All") params.target = filterType;
 
-    logService
-      .getGlobalLogs(params)
+    observationService
+      .getGlobalObservations(params)
       .then((data) => setLogs(data))
       .catch(console.error)
       .finally(() => setIsLoading(false));
@@ -46,9 +46,9 @@ const ObservationLogsPage = () => {
 
   return (
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
-      <Sidebar onLogCreated={fetchLogs} />
+      <Sidebar onObservationCreated={fetchLogs} />
 
-      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <div className="flex-1 md:ml-64 overflow-y-auto custom-scrollbar h-screen pb-20 md:pb-0">
         <div className="flex min-h-full">
           <main className="flex-1 px-8 py-8 pb-24">
             <div className="max-w-4xl flex flex-col gap-8">
@@ -116,4 +116,4 @@ const ObservationLogsPage = () => {
   );
 };
 
-export default ObservationLogsPage;
+export default ObservationsPage;

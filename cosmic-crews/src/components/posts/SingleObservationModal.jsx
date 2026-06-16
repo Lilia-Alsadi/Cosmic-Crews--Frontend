@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowLeft } from "lucide-react";
-import LogDetails from "./LogDetails";
+import ObservationDetails from "./ObservationDetails";
 import CommentSection from "./CommentSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { DEFAULT_LOG_IMAGE } from "../../utils/constants";
@@ -35,7 +35,7 @@ const SingleObservationModal = ({ isOpen, onClose, log, onCommentAdded }) => {
             </div>
 
             <div className="w-[40%] flex flex-col h-full bg-[#151A30] p-6 overflow-y-auto custom-scrollbar">
-              <LogDetails log={log} />
+              <ObservationDetails log={log} />
               <CommentSection log={log} onCommentAdded={onCommentAdded} />
             </div>
           </motion.div>

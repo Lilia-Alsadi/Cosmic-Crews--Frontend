@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Home, Users, User, PlusCircle, BookOpen, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import CreateLogModal from "../posts/CreateLogModal";
+import CreateObservationModal from "../posts/CreateObservationModal";
 
-const Sidebar = ({ onNewLogClick, onLogCreated }) => {
+const Sidebar = ({ onNewLogClick, onObservationCreated }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
@@ -18,66 +18,96 @@ const Sidebar = ({ onNewLogClick, onLogCreated }) => {
   };
 
   return (
-    <aside className="fixed top-0 left-0 w-64 h-screen bg-[#070a14] border-r border-white/5 flex flex-col z-50">
-      <div className="p-6 flex items-center gap-3">
-        <svg className="w-8 h-8 text-purple-400 group-hover:text-purple-300 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-          <circle cx="12" cy="12" r="4" fill="currentColor" fillOpacity="0.2" />
-        </svg>
-        <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400">Cosmic Crews</h1>
-      </div>
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:flex fixed top-0 left-0 w-64 h-screen bg-[#070a14] border-r border-white/5 flex-col z-50">
+        <div className="p-6 flex items-center gap-3">
+          <svg className="w-8 h-8 text-purple-400 group-hover:text-purple-300 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            <circle cx="12" cy="12" r="4" fill="currentColor" fillOpacity="0.2" />
+          </svg>
+          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400">Cosmic Crews</h1>
+        </div>
 
-      <nav className="flex-1 px-4 py-4 flex flex-col gap-2">
-        <Link to="/dashboard" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/dashboard") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
-          <Home size={20} className={isActive("/dashboard") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
-          <span className={isActive("/dashboard") ? "font-semibold tracking-wide" : "font-medium"}>Home</span>
+        <nav className="flex-1 px-4 py-4 flex flex-col gap-2">
+          <Link to="/dashboard" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/dashboard") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
+            <Home size={20} className={isActive("/dashboard") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
+            <span className={isActive("/dashboard") ? "font-semibold tracking-wide" : "font-medium"}>Home</span>
+          </Link>
+
+          <Link to="/crews" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/crews") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
+            <Users size={20} className={isActive("/crews") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
+            <span className={isActive("/crews") ? "font-semibold tracking-wide" : "font-medium"}>Crews</span>
+          </Link>
+
+          <Link to="/logs" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/logs") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
+            <BookOpen size={20} className={isActive("/logs") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
+            <span className={isActive("/logs") ? "font-semibold tracking-wide" : "font-medium"}>Logs</span>
+          </Link>
+
+          <Link to="/profile" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/profile") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
+            <User size={20} className={isActive("/profile") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
+            <span className={isActive("/profile") ? "font-semibold tracking-wide" : "font-medium"}>Profile</span>
+          </Link>
+
+          {user?.role === "ADMIN" && (
+            <>
+              <div className="mt-4 mb-2 px-4">
+                <div className="h-px w-full bg-slate-800"></div>
+              </div>
+              <Link to="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/admin") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
+                <Shield size={20} className={isActive("/admin") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
+                <span className={isActive("/admin") ? "font-semibold tracking-wide" : "font-medium"}>Admin</span>
+              </Link>
+            </>
+          )}
+        </nav>
+
+        <div className="px-6 pb-6 pt-2 mt-auto flex flex-col gap-6">
+          <button
+            onClick={() => {
+              if (onNewLogClick) onNewLogClick();
+              setIsCreateModalOpen(true);
+            }}
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all transform hover:-translate-y-0.5"
+          >
+            <PlusCircle size={18} strokeWidth={3} />
+            <span>New Log</span>
+          </button>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-slate-500 font-medium px-2 text-center">© {new Date().getFullYear()} Cosmic Crews</div>
+        </div>
+      </aside>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#0B1021]/95 backdrop-blur-md border-t border-slate-800 z-50 px-2 py-2 flex items-center justify-around shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+        <Link to="/dashboard" className={`p-3 rounded-xl transition-all ${isActive("/dashboard") ? "text-purple-400 bg-purple-900/20" : "text-gray-400"}`}>
+          <Home size={24} />
         </Link>
-
-        <Link to="/crews" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/crews") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
-          <Users size={20} className={isActive("/crews") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
-          <span className={isActive("/crews") ? "font-semibold tracking-wide" : "font-medium"}>Crews</span>
+        <Link to="/crews" className={`p-3 rounded-xl transition-all ${isActive("/crews") ? "text-purple-400 bg-purple-900/20" : "text-gray-400"}`}>
+          <Users size={24} />
         </Link>
-
-        <Link to="/logs" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/logs") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
-          <BookOpen size={20} className={isActive("/logs") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
-          <span className={isActive("/logs") ? "font-semibold tracking-wide" : "font-medium"}>Logs</span>
-        </Link>
-
-        <Link to="/profile" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/profile") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
-          <User size={20} className={isActive("/profile") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
-          <span className={isActive("/profile") ? "font-semibold tracking-wide" : "font-medium"}>Profile</span>
-        </Link>
-
-        {user?.role === "ADMIN" && (
-          <>
-            <div className="mt-4 mb-2 px-4">
-              <div className="h-px w-full bg-slate-800"></div>
-            </div>
-            <Link to="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive("/admin") ? "bg-purple-900/40 text-white border-l-2 border-purple-400 shadow-[inset_2px_0_0_rgba(192,132,252,0.8)]" : "text-gray-400 hover:text-white hover:bg-white/5"}`}>
-              <Shield size={20} className={isActive("/admin") ? "text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" : ""} />
-              <span className={isActive("/admin") ? "font-semibold tracking-wide" : "font-medium"}>Admin</span>
-            </Link>
-          </>
-        )}
-      </nav>
-
-      <div className="px-6 pb-6 pt-2 mt-auto flex flex-col gap-6">
+        
+        {/* Floating Action Button for New Log */}
         <button
           onClick={() => {
             if (onNewLogClick) onNewLogClick();
             setIsCreateModalOpen(true);
           }}
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all transform hover:-translate-y-0.5"
+          className="p-4 -mt-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-[0_0_20px_rgba(168,85,247,0.6)] hover:scale-105 transition-transform"
         >
-          <PlusCircle size={18} strokeWidth={3} />
-          <span>New Log</span>
+          <PlusCircle size={28} strokeWidth={2.5} />
         </button>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-slate-500 font-medium px-2 text-center">© {new Date().getFullYear()} Cosmic Crews</div>
-      </div>
+        <Link to="/logs" className={`p-3 rounded-xl transition-all ${isActive("/logs") ? "text-purple-400 bg-purple-900/20" : "text-gray-400"}`}>
+          <BookOpen size={24} />
+        </Link>
+        <Link to="/profile" className={`p-3 rounded-xl transition-all ${isActive("/profile") ? "text-purple-400 bg-purple-900/20" : "text-gray-400"}`}>
+          <User size={24} />
+        </Link>
+      </nav>
 
-      <CreateLogModal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onLogCreated={onLogCreated} />
-    </aside>
+      <CreateObservationModal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onObservationCreated={onObservationCreated} />
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import CosmicEventsWidget from "../components/dashboard/CosmicEventsWidget";
 import TargetOfTheNightWidget from "../components/dashboard/TargetOfTheNightWidget";
 import SingleObservationModal from "../components/posts/SingleObservationModal";
 import { useAuth } from "../context/AuthContext";
-import { logService } from "../api/logService";
+import { observationService } from "../api/observationService";
 
 const DashboardPage = () => {
   const { user } = useAuth();
@@ -20,8 +20,8 @@ const DashboardPage = () => {
   const fetchLogs = () => {
     if (user) {
       setIsLoading(true);
-      logService
-        .getGlobalLogs({ feed: "popular" })
+      observationService
+        .getGlobalObservations({ feed: "popular" })
         .then((data) => setLogs(data))
         .catch(console.error)
         .finally(() => setIsLoading(false));
@@ -46,8 +46,8 @@ const DashboardPage = () => {
 
   return (
     <div className="flex w-full h-screen bg-[#0B1021] text-white overflow-hidden relative">
-      <Sidebar onLogCreated={fetchLogs} />
-      <div className="flex-1 ml-64 overflow-y-auto custom-scrollbar h-screen">
+      <Sidebar onObservationCreated={fetchLogs} />
+      <div className="flex-1 md:ml-64 overflow-y-auto custom-scrollbar h-screen pb-20 md:pb-0">
         <div className="flex min-h-full">
           <main className="flex-1 px-8 py-6 pb-24">
             <div className="max-w-5xl flex flex-col gap-8">
